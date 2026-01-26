@@ -26,6 +26,8 @@ class Program
                 Console.WriteLine("You have selected to book a conference room.");
                 Console.WriteLine("List of available rooms:");
                 // Call booking method here
+                ConferenceRoom conferenceRoom = new ConferenceRoom();
+                Console.WriteLine(conferenceRoom.GetAvailableRooms().ToString());
                 break;
 
             case "2":
