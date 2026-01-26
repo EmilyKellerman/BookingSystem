@@ -12,9 +12,6 @@ public class ConferenceRoom
     /// List of existing rooms - Private
     private List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
 
-    public ConferenceRoom()
-    {}//default constructor
-
     public ConferenceRoom( string RoomNum, int Capacity, BookingStatus Status)
     {
         /// Setting properties
