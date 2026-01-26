@@ -39,5 +39,11 @@ public class ConferenceRoom
         }
     }
 
+    public enum BookingStatus
+    {
+        Available,
+        Booked,
+        Unavailable
+    }
 
 }
