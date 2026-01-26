@@ -3,8 +3,12 @@
 /// Describes what a conference room in in the logic of the business
 /// Last updates 26/01/2026
 
+/// Conference Room class
+/// Defines properties and methods related to conference rooms
 public class ConferenceRoom
 {
+    /// Properties -> All of them are readonly outside of the class
+    /// A separate class can be made available to manage room creation and updates by the admin staff type in the future
     public string RoomNum { get; private set; }
     public int Capacity { get; private set; }
     public BookingStatus Status { get; private set; }
@@ -39,11 +43,69 @@ public class ConferenceRoom
         }
     }
 
+    public ConferenceRoom()
+    {
+        /// Default constructor
+    }
+
     public enum BookingStatus
     {
         Available,
         Booked,
-        Unavailable
+        UnderMaintenance
+    }
+
+    public bool BookRoom(string RoomNum)
+    {
+        /// Method to book a room
+        bool BookingSuccess = false;
+        foreach( ConferenceRoom room in lstRooms )
+        {
+            if ( room.RoomNum == RoomNum && room.Status == BookingStatus.Available )
+            {
+                room.Status = BookingStatus.Booked;
+                BookingSuccess = true;
+            }
+            else
+            {
+                BookingSuccess = false;
+            }
+        }
+        return BookingSuccess;
+        
+    }
+
+    public bool CancelBooking(string RoomNum)
+    {
+        /// Method to cancel a booking
+        bool CancellationSuccess = false;
+        foreach( ConferenceRoom room in lstRooms )
+        {
+            if ( room.RoomNum == RoomNum && room.Status == BookingStatus.Booked )
+            {
+                room.Status = BookingStatus.Available;
+                CancellationSuccess = true;
+            }
+            else
+            {
+                CancellationSuccess = false;
+            }
+        }
+        return CancellationSuccess;
+    }
+
+    public List<ConferenceRoom> GetAvailableRooms()
+    {
+        /// Method to get a list of available rooms
+        List<ConferenceRoom> availableRooms = new List<ConferenceRoom>();
+        foreach( ConferenceRoom room in lstRooms )
+        {
+            if ( room.Status == BookingStatus.Available )
+            {
+                availableRooms.Add(room);
+            }
+        }
+        return availableRooms;
     }
 
 }

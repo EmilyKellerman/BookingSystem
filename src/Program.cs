@@ -4,6 +4,7 @@
 
 using System;
 
+/// The booking logic
 class Program
 {
     static void Main(string[] args)
@@ -20,17 +21,42 @@ class Program
 
         /// Get user input
         string input = Console.ReadLine();
+        ConferenceRoom conferenceRoom = new ConferenceRoom();
         switch (input)
         {
             case "1":
                 Console.WriteLine("You have selected to book a conference room.");
                 Console.WriteLine("List of available rooms:");
                 // Call booking method here
+                Console.WriteLine(conferenceRoom.GetAvailableRooms().ToString());
+                Console.WriteLine("Please enter the room number you wish to book:");
+                string roomToBook = Console.ReadLine();
+                bool bookSuccess = conferenceRoom.BookRoom(roomToBook);
+                if (bookSuccess)
+                {
+                    Console.WriteLine("Room successfully booked.");
+                }
+                else
+                {
+                    Console.WriteLine("Booking failed. Please check the room number and try again.");
+                }
+                
                 break;
 
             case "2":
                 Console.WriteLine("You have selected to cancel a booking.");
                 // Call cancellation method here
+                Console.WriteLine("Please enter the room number of the booking you wish to cancel:");
+                string roomNum = Console.ReadLine();
+                bool cancelSuccess = conferenceRoom.CancelBooking(roomNum);
+                if (cancelSuccess)
+                {
+                    Console.WriteLine("Booking successfully cancelled.");
+                }
+                else
+                {
+                    Console.WriteLine("Cancellation failed. Please check the room number and try again.");
+                }
                 break;
 
             case "3":
@@ -39,7 +65,7 @@ class Program
                 string empNumber = Console.ReadLine();
                 Console.WriteLine("Please enter your password:");
                 string password = Console.ReadLine();
-                // Call admin login method here
+                // Call admin login method here - will be added in the future
                 break;
 
             default:
