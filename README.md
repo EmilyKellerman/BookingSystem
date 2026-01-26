@@ -15,7 +15,8 @@ This code will eventually be merged with existing API endpoints and documentatio
 
 - `README.md` – Basic project overview
 - `src/` - Contains all the project C# code 
-- `LICENSE` – Will be added in the future, I forgot to add it when creating the repository
+- `.github/` - pull_request_template.md, issue_template/ - bug_report.md, feature_request.md
+- `LICENSE` – Information on the MIT licence applicable to this project
 
 ---
 
@@ -117,7 +118,7 @@ This repository is currently used for:
 
 ## 📄 License
 
-This project will be licensed under the MIT License.
+This project is licensed under the MIT License.
 
 ---
 
