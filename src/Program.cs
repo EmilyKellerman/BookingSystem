@@ -4,6 +4,7 @@
 
 using System;
 
+/// The booking logic
 class Program
 {
     static void Main(string[] args)

@@ -3,9 +3,12 @@
 /// Describes what a conference room in in the logic of the business
 /// Last updates 26/01/2026
 
+/// Conference Room class
+/// Defines properties and methods related to conference rooms
 public class ConferenceRoom
 {
-    /// Properties
+    /// Properties -> All of them are readonly outside of the class
+    /// A separate class can be made available to manage room creation and updates by the admin staff type in the future
     public string RoomNum { get; private set; }
     public int Capacity { get; private set; }
     public BookingStatus Status { get; private set; }
