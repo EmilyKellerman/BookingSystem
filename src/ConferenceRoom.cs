@@ -16,7 +16,7 @@ public class ConferenceRoom
 
     public ConferenceRoom( string RoomNumber, string RoomName, int Capacity, RoomType RoomType = RoomType.Medium )
     {
-        /// Setting properties
+        /// Setting field values
         this.RoomNumber = RoomNumber;
         this.RoomName = RoomName;
         this.Capacity = Capacity;
