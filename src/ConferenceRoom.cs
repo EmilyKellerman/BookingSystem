@@ -20,9 +20,9 @@ public class ConferenceRoom
     public ConferenceRoom( string RoomNumber, string RoomName, int Capacity)
     {
         /// Setting properties
-        this.Capacity = Capacity;
         this.RoomNumber = RoomNumber;
         this.RoomName = RoomName;
+        this.Capacity = Capacity;
         this.Status = BookingStatus.Available;
 
         /// If the list isn't empty then search the list for a room with the same room number
@@ -47,6 +47,7 @@ public class ConferenceRoom
 
     /// List of existing rooms - Private
     private List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+    
 
     public ConferenceRoom()
     {

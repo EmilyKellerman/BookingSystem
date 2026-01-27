@@ -38,20 +38,21 @@ class Program
                 Console.WriteLine(new ConferenceRoom().GetAvailableRooms().ToString());
 
                 Console.WriteLine("Please enter the room number you wish to book:");
-                string roomToBook = Console.ReadLine();
+                string roomNum = Console.ReadLine();
 
                 Console.WriteLine("Please enter your name:");
                 string bookerName = Console.ReadLine();
 
-                Console.WriteLine("Please enter the date you wish to book the room for (YYYY-MM-DD):");
+                Console.WriteLine("Please enter the date you wish to book the room for (yyyy-MM-dd HH:mm):");
                 string dateInput = Console.ReadLine();
 
-                Booking
+                
+                Booking Booking = new Booking();
 
 
-
-                if (bookSuccess)
+                if (Booking.BookRoom(roomNum, bookerName, DateTime.Parse(dateInput)))
                 {
+                    BookingRequest newBooking = new BookingRequest(roomNum, bookerName, DateTime.Parse(dateInput));
                     Console.WriteLine("Room successfully booked.");
                 }
                 else
@@ -65,10 +66,19 @@ class Program
                 Console.WriteLine("You have selected to cancel a booking.");
                 // Call cancellation method here
                 Console.WriteLine("Please enter the room number of the booking you wish to cancel:");
-                string roomNum = Console.ReadLine();
-                bool cancelSuccess = conferenceRoom.CancelBooking(roomNum);
-                if (cancelSuccess)
+                roomNum = Console.ReadLine();
+
+                Console.WriteLine("Please enter your name:");
+                bookerName = Console.ReadLine();
+
+                Console.WriteLine("Please enter the date of the booking you wish to cancel (yyyy-MM-dd HH:mm):");
+                dateInput = Console.ReadLine();
+
+                Booking booking = new Booking();
+
+                if (booking.CancelBooking(roomNum, bookerName, DateTime.Parse(dateInput)))
                 {
+                    BookingRequest cancelledBooking = new BookingRequest(roomNum, bookerName, DateTime.Parse(dateInput));
                     Console.WriteLine("Booking successfully cancelled.");
                 }
                 else

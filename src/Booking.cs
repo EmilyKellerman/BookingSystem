@@ -6,45 +6,59 @@ public class Booking
     public BookingStatus Status { get; }
     public string BookerName { get; }
 
+    //List to hold booking requests
+    private readonly List<BookingRequest> _History = new List<BookingRequest>();
+
     //constructor
     public Booking ( string RoomNumber, string BookerName, DateTime BookingDate )
     {
         this.RoomNumber = RoomNumber;
-        BookRoom(RoomNumber, BookerName, BookingDate);
         this.BookerName = BookerName;
         this.BookingDate = BookingDate;
 
     }
 
-    //Booking request record
-    public record BookingRequest(string RoomNumber, string BookerName, DateTime BookingDate);
-    //List to hold booking requests
-    private List<BookingRequest> bookingRequests = new List<BookingRequest>();
+    public Booking()
+    {
+        /// Default constructor   
+    }
     
     //List of rooms from ConferenceRoom class
     private List<ConferenceRoom> lstRooms = new ConferenceRoom().GetAvailableRooms();
 
-    private bool BookRoom(string RoomNum, string BookerName, DateTime BookingDate)
+    //Properties
+    public IReadOnlyList<BookingRequest> History
     {
-        /// Method to book a room
+        get
+        {
+            return _History;
+        }
+    }
+
+    //Method to book a room
+    public bool BookRoom(string RoomNum, string BookerName, DateTime BookingDate)
+    {
+        bool bookSuccess = false;
         foreach( ConferenceRoom room in lstRooms )
         {
             if ( room.RoomNumber == RoomNum && room.Status == BookingStatus.Available )
             {
-                BookingRequest newBooking = new BookingRequest(RoomNum, "Default Booker", DateTime.Now);
-                bookingRequests.Add(newBooking);
+                BookingRequest newBooking = new BookingRequest(RoomNum, BookerName, BookingDate);
+                _History.Add(newBooking);
                 room.Status = BookingStatus.Booked;
-                return true;
+                bookSuccess = true;
             }
             else
             {
-                return false;
+                bookSuccess = false;
             }
         }
+        return bookSuccess;
         
     }
 
-    private bool CancelBooking(string RoomNum)
+    /// Method to cancel a booking
+    public bool CancelBooking(string RoomNum, string BookerName, DateTime BookingDate)
     {
         /// Method to cancel a booking
         bool CancellationSuccess = false;
@@ -52,6 +66,8 @@ public class Booking
         {
             if ( room.RoomNumber == RoomNum && room.Status == BookingStatus.Booked )
             {
+                BookingRequest bookingToCancel = new BookingRequest(RoomNum, BookerName, BookingDate);//I don't know if it's neccessary to create a new booking record here
+                //_History.Remove(bookingToCancel);
                 room.Status = BookingStatus.Available;
                 CancellationSuccess = true;
             }
