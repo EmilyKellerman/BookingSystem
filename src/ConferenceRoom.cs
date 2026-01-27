@@ -1,27 +1,27 @@
-/// Emily Kellerman
 /// Conference Room class
-/// Describes what a conference room in in the logic of the business
-/// Last updates 26/01/2026
+/// Describes what a conference room is in the logic of the business
+/// Last updates 27/01/2026
 
-/// Conference Room class
-/// Defines properties and methods related to conference rooms
 public class ConferenceRoom
 {
     /// Properties -> All of them are readonly outside of the class
     /// A separate class can be made available to manage room creation and updates by the admin staff type in the future
-    public string RoomNum { get; private set; }
-    public int Capacity { get; private set; }
-    public BookingStatus Status { get; private set; }
-    
-    /// List of existing rooms - Private
-    private List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+    public string RoomNumber { get; }
+    public string RoomName { get; }
+    public int Capacity { get; }
+    public RoomType RoomType { get;}
 
-    public ConferenceRoom( string RoomNum, int Capacity, BookingStatus Status)
+    //Must be able to change the status when its booked, available or under maintenance, therefore not readonly
+    public BookingStatus Status { get; set; }
+
+    public ConferenceRoom( string RoomNumber, string RoomName, int Capacity, RoomType RoomType = RoomType.Medium )
     {
-        /// Setting properties
+        /// Setting field values
+        this.RoomNumber = RoomNumber;
+        this.RoomName = RoomName;
         this.Capacity = Capacity;
-        this.Status = Status;
-        this.RoomNum = RoomNum;
+        this.Status = BookingStatus.Available;
+        this.RoomType = RoomType;
 
         /// If the list isn't empty then search the list for a room with the same room number
         /// If a room with the same room number exists, It will just replace that room with the new version
@@ -29,7 +29,7 @@ public class ConferenceRoom
         {
             foreach( ConferenceRoom room in lstRooms )
             {
-                if ( room.RoomNum == this.RoomNum )
+                if ( room.RoomNumber == this.RoomNumber )
                 {
                     lstRooms[lstRooms.IndexOf(room)] = this;
                 }
@@ -43,69 +43,25 @@ public class ConferenceRoom
         }
     }
 
+    /// List of existing rooms - Private and Static so all instances share the same list
+    private static List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+    
+
     public ConferenceRoom()
     {
-        /// Default constructor
-    }
-
-    public enum BookingStatus
-    {
-        Available,
-        Booked,
-        UnderMaintenance
-    }
-
-    public bool BookRoom(string RoomNum)
-    {
-        /// Method to book a room
-        bool BookingSuccess = false;
-        foreach( ConferenceRoom room in lstRooms )
-        {
-            if ( room.RoomNum == RoomNum && room.Status == BookingStatus.Available )
-            {
-                room.Status = BookingStatus.Booked;
-                BookingSuccess = true;
-            }
-            else
-            {
-                BookingSuccess = false;
-            }
-        }
-        return BookingSuccess;
-        
-    }
-
-    public bool CancelBooking(string RoomNum)
-    {
-        /// Method to cancel a booking
-        bool CancellationSuccess = false;
-        foreach( ConferenceRoom room in lstRooms )
-        {
-            if ( room.RoomNum == RoomNum && room.Status == BookingStatus.Booked )
-            {
-                room.Status = BookingStatus.Available;
-                CancellationSuccess = true;
-            }
-            else
-            {
-                CancellationSuccess = false;
-            }
-        }
-        return CancellationSuccess;
+        // default constructor
     }
 
     public List<ConferenceRoom> GetAvailableRooms()
     {
-        /// Method to get a list of available rooms
-        List<ConferenceRoom> availableRooms = new List<ConferenceRoom>();
-        foreach( ConferenceRoom room in lstRooms )
-        {
-            if ( room.Status == BookingStatus.Available )
-            {
-                availableRooms.Add(room);
-            }
-        }
+        /// Method to get a list of available rooms using LINQ
+        List<ConferenceRoom> availableRooms = lstRooms.Where(room => room.Status == BookingStatus.Available).ToList();
         return availableRooms;
     }
 
+    public List<ConferenceRoom> GetAllRooms()
+    {
+        /// Method to get all rooms regardless of status
+        return new List<ConferenceRoom>(lstRooms);
+    }
 }
