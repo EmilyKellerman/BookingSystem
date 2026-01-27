@@ -1,7 +1,5 @@
-/// <summary>
 /// List of enums used in the Booking System
 /// Last updates 27/01/2026
-/// </summary>
 
 public enum BookingStatus
     {

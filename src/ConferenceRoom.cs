@@ -1,10 +1,6 @@
-/// Emily Kellerman
 /// Conference Room class
-/// Describes what a conference room in in the logic of the business
-/// Last updates 26/01/2026
-
-/// Conference Room class
-/// Defines properties and methods related to conference rooms
+/// Describes what a conference room is in the logic of the business
+/// Last updates 27/01/2026
 
 public class ConferenceRoom
 {
@@ -13,17 +9,19 @@ public class ConferenceRoom
     public string RoomNumber { get; }
     public string RoomName { get; }
     public int Capacity { get; }
+    public RoomType RoomType { get;}
 
     //Must be able to change the status when its booked, available or under maintenance, therefore not readonly
     public BookingStatus Status { get; set; }
 
-    public ConferenceRoom( string RoomNumber, string RoomName, int Capacity)
+    public ConferenceRoom( string RoomNumber, string RoomName, int Capacity, RoomType RoomType = RoomType.Medium )
     {
         /// Setting properties
         this.RoomNumber = RoomNumber;
         this.RoomName = RoomName;
         this.Capacity = Capacity;
         this.Status = BookingStatus.Available;
+        this.RoomType = RoomType;
 
         /// If the list isn't empty then search the list for a room with the same room number
         /// If a room with the same room number exists, It will just replace that room with the new version
@@ -45,38 +43,25 @@ public class ConferenceRoom
         }
     }
 
-    /// List of existing rooms - Private
-    private List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+    /// List of existing rooms - Private and Static so all instances share the same list
+    private static List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
     
 
     public ConferenceRoom()
     {
-        if ( string.IsNullOrWhiteSpace(RoomNumber) )
-        {
-            throw new ArgumentException("Room must have a number");
-        }   
-        else if ( string.IsNullOrWhiteSpace(RoomName) )
-        {
-            throw new ArgumentException("Room must have a name");
-        }
-        else if ( Capacity <= 0 )
-        {
-            Capacity = 1;
-        }
-            
+        // default constructor
     }
 
     public List<ConferenceRoom> GetAvailableRooms()
     {
-        /// Method to get a list of available rooms
-        List<ConferenceRoom> availableRooms = new List<ConferenceRoom>();
-        foreach( ConferenceRoom room in lstRooms )
-        {
-            if ( room.Status == BookingStatus.Available )
-            {
-                availableRooms.Add(room);
-            }
-        }
+        /// Method to get a list of available rooms using LINQ
+        List<ConferenceRoom> availableRooms = lstRooms.Where(room => room.Status == BookingStatus.Available).ToList();
         return availableRooms;
+    }
+
+    public List<ConferenceRoom> GetAllRooms()
+    {
+        /// Method to get all rooms regardless of status
+        return new List<ConferenceRoom>(lstRooms);
     }
 }
