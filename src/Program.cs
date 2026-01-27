@@ -9,6 +9,13 @@ class Program
 {
     static void Main(string[] args)
     {
+        //Hardcoded rooms for testing purposes
+        ConferenceRoom room1 = new ConferenceRoom("101", "Alpha", 10);
+        ConferenceRoom room2 = new ConferenceRoom("102", "Beta", 20);
+        ConferenceRoom room3 = new ConferenceRoom("201", "Gamma", 15);
+        ConferenceRoom room4 = new ConferenceRoom("202", "Delta", 25);
+        ConferenceRoom room5 = new ConferenceRoom("301", "Epsilon", 50);
+
         ///introduction message and menu selection
         Console.WriteLine("Welcome to the Booking System");
         Console.WriteLine("Please select an option from the menu below:");
@@ -28,10 +35,21 @@ class Program
                 Console.WriteLine("You have selected to book a conference room.");
                 Console.WriteLine("List of available rooms:");
                 // Call booking method here
-                Console.WriteLine(conferenceRoom.GetAvailableRooms().ToString());
+                Console.WriteLine(new ConferenceRoom().GetAvailableRooms().ToString());
+
                 Console.WriteLine("Please enter the room number you wish to book:");
                 string roomToBook = Console.ReadLine();
-                bool bookSuccess = conferenceRoom.BookRoom(roomToBook);
+
+                Console.WriteLine("Please enter your name:");
+                string bookerName = Console.ReadLine();
+
+                Console.WriteLine("Please enter the date you wish to book the room for (YYYY-MM-DD):");
+                string dateInput = Console.ReadLine();
+
+                Booking
+
+
+
                 if (bookSuccess)
                 {
                     Console.WriteLine("Room successfully booked.");

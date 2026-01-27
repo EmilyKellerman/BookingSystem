@@ -5,23 +5,25 @@
 
 /// Conference Room class
 /// Defines properties and methods related to conference rooms
+
 public class ConferenceRoom
 {
     /// Properties -> All of them are readonly outside of the class
     /// A separate class can be made available to manage room creation and updates by the admin staff type in the future
-    public string RoomNum { get; private set; }
-    public int Capacity { get; private set; }
-    public BookingStatus Status { get; private set; }
-    
-    /// List of existing rooms - Private
-    private List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+    public string RoomNumber { get; }
+    public string RoomName { get; }
+    public int Capacity { get; }
 
-    public ConferenceRoom( string RoomNum, int Capacity, BookingStatus Status)
+    //Must be able to change the status when its booked, available or under maintenance, therefore not readonly
+    public BookingStatus Status { get; set; }
+
+    public ConferenceRoom( string RoomNumber, string RoomName, int Capacity)
     {
         /// Setting properties
         this.Capacity = Capacity;
-        this.Status = Status;
-        this.RoomNum = RoomNum;
+        this.RoomNumber = RoomNumber;
+        this.RoomName = RoomName;
+        this.Status = BookingStatus.Available;
 
         /// If the list isn't empty then search the list for a room with the same room number
         /// If a room with the same room number exists, It will just replace that room with the new version
@@ -29,7 +31,7 @@ public class ConferenceRoom
         {
             foreach( ConferenceRoom room in lstRooms )
             {
-                if ( room.RoomNum == this.RoomNum )
+                if ( room.RoomNumber == this.RoomNumber )
                 {
                     lstRooms[lstRooms.IndexOf(room)] = this;
                 }
@@ -43,55 +45,24 @@ public class ConferenceRoom
         }
     }
 
+    /// List of existing rooms - Private
+    private List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+
     public ConferenceRoom()
     {
-        /// Default constructor
-    }
-
-    public enum BookingStatus
-    {
-        Available,
-        Booked,
-        UnderMaintenance
-    }
-
-    public bool BookRoom(string RoomNum)
-    {
-        /// Method to book a room
-        bool BookingSuccess = false;
-        foreach( ConferenceRoom room in lstRooms )
+        if ( string.IsNullOrWhiteSpace(RoomNumber) )
         {
-            if ( room.RoomNum == RoomNum && room.Status == BookingStatus.Available )
-            {
-                room.Status = BookingStatus.Booked;
-                BookingSuccess = true;
-            }
-            else
-            {
-                BookingSuccess = false;
-            }
-        }
-        return BookingSuccess;
-        
-    }
-
-    public bool CancelBooking(string RoomNum)
-    {
-        /// Method to cancel a booking
-        bool CancellationSuccess = false;
-        foreach( ConferenceRoom room in lstRooms )
+            throw new ArgumentException("Room must have a number");
+        }   
+        else if ( string.IsNullOrWhiteSpace(RoomName) )
         {
-            if ( room.RoomNum == RoomNum && room.Status == BookingStatus.Booked )
-            {
-                room.Status = BookingStatus.Available;
-                CancellationSuccess = true;
-            }
-            else
-            {
-                CancellationSuccess = false;
-            }
+            throw new ArgumentException("Room must have a name");
         }
-        return CancellationSuccess;
+        else if ( Capacity <= 0 )
+        {
+            Capacity = 1;
+        }
+            
     }
 
     public List<ConferenceRoom> GetAvailableRooms()
@@ -107,5 +78,4 @@ public class ConferenceRoom
         }
         return availableRooms;
     }
-
 }
