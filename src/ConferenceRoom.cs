@@ -49,15 +49,16 @@ public class ConferenceRoom
 
     public ConferenceRoom()
     {
-        // default constructor
+        ///Default Constructor
     }
 
-    public List<ConferenceRoom> GetAvailableRooms()
-    {
-        /// Method to get a list of available rooms using LINQ
-        List<ConferenceRoom> availableRooms = lstRooms.Where(room => room.Status == BookingStatus.Available).ToList();
-        return availableRooms;
-    }
+    //Method to get rooms if their status is available -> not necessary because it doesn't make logical sense (leaving here for in case it's useful later)
+    // public List<ConferenceRoom> GetAvailableRooms()
+    // {
+    //     /// Method to get a list of available rooms using LINQ
+    //     List<ConferenceRoom> availableRooms = lstRooms.Where(room => room.Status == BookingStatus.Available).ToList();
+    //     return availableRooms;
+    // }
 
     public List<ConferenceRoom> GetAllRooms()
     {
