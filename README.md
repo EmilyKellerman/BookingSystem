@@ -8,11 +8,45 @@ There will also be functionality for a receptionist to book on behalf of another
 The code has been laid out with room for expansion for these features.
 
 The current features are:
-1) Listing of rooms
-2) Booking a room
-3) Canceling a booking
+1) Booking a room
+2) Canceling a booking
+3) Exporting booking history as a json file
+4) Loading history from a json file
 
 This code will eventually be merged with existing API endpoints and documentation.
+
+---
+
+## Table of Contents
+
+[How Failures are Handled](##How-Failures-are-Handled)
+[Where Async is Used](#Where-Async-is-Used)
+[🗂 Repository Contents](#🗂-Repository-Contents)
+[⚙️ Installation](#⚙️-Installation)
+[📌 Purpose of This Repository](#📌-Purpose-of-This-Repository)
+[📋 System context](#📋-System-context)
+[💪 Developer Onboarding Guide](#💪-Developer-Onboarding-Guide)
+[🗎 Project Documentation](#🗎-Project-Documentation)
+[Key Folders](#Key-Folders)
+[🤝 Contributing](#🤝-Contributing)
+[⏰ Upcomming Documentation](#⏰-Upcomming-Documentation)
+[📄 License](#📄-License)
+[✍️ Author](#✍️-Author)
+
+---
+
+## How Failures are Handled
+
+- In the client code, all data that is taken from user input is validated before being passed into methods of other classes
+- In methods, all data is validated before furhtering steps can be taken
+- All validation follows a fail-fast approach to avoid invalid object states
+
+---
+
+## Where Async is Used
+
+- This project makes use of async in creating a json file with booking history
+- This project makes use of async in loading a json file with booking history
 
 ---
 
@@ -57,10 +91,6 @@ The conference room booking system is intended to manage:
 - Receptionist Ability to Help Employees and Guests
 - Facility Managers Ability to Schedule Rooms for Maintenance 
 
-At this stage, the system is documented through:
-- README.md
-- Documents in .github
-
 ---
 
 ## 💪 Developer Onboarding Guide
@@ -101,13 +131,6 @@ Contributors should:
 - Submit changes via a Pull Request
 - Clearly describe the intent of the change and what was added or changed
 - A clear pull request template has been provided under .github/
-
----
-
-## 🚀 Usage
-
-This repository is currently used for:
-1) Editing project code for the booking system
 
 ---
 
