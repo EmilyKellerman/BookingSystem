@@ -6,7 +6,7 @@ using System;
 public class Booking
 {
     //auto-implemented properties
-    public string RoomNumber { get; }
+    private ConferenceRoom conferenceRoom { get; set; }
     public DateTime BookingDate { get; }
     public DateTime StartTime { get; }
     public DateTime EndTime { get; }
@@ -17,18 +17,22 @@ public class Booking
     private static readonly List<BookingRequest> _History = new List<BookingRequest>();
 
     //constructor
-    public Booking ( string RoomNumber, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
+    public Booking ( ConferenceRoom conferenceRoom, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
     {
-        this.RoomNumber = RoomNumber;
+        this.conferenceRoom = conferenceRoom;
         this.BookerName = BookerName;
         this.BookingDate = BookingDate;
         this.StartTime = StartTime;
         this.EndTime = EndTime;
+
+        //create a record of the booking and add it to the history
+        BookingRequest bookingRequest = new BookingRequest(this);
+        _History.Add(bookingRequest);
     }
 
     public Booking()
     {
-        /// Default constructor   
+        ///
     }
     
     //List of rooms from ConferenceRoom class - Get ALL rooms, not just available
@@ -43,18 +47,19 @@ public class Booking
         }
     }
 
+    //using dictionary to group the booking requests by room type
     public Dictionary<RoomType, List<BookingRequest>> GroupByRoomType()
         {
-            var grouped = new Dictionary<RoomType, List<BookingRequest>>();
+            Dictionary<RoomType, List<BookingRequest>> grouped = new Dictionary<RoomType, List<BookingRequest>>();
 
-            foreach (var request in _History)
+            foreach (BookingRequest request in _History)
             {
-                if (!grouped.ContainsKey(request.RoomType))
+                if (!grouped.ContainsKey(request.Booking.conferenceRoom.RoomType))
                 {
-                    grouped[request.RoomType] = new List<BookingRequest>();
+                    grouped[request.Booking.conferenceRoom.RoomType] = new List<BookingRequest>();
                 }
 
-                grouped[request.RoomType].Add(request);
+                grouped[request.Booking.conferenceRoom.RoomType].Add(request);
             }
 
             return grouped;
@@ -63,86 +68,82 @@ public class Booking
     //Method to book a room
     public bool BookRoom(string RoomNum, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
     {
-        // Find and validate the room
-        ConferenceRoom targetRoom = null;
-        foreach(ConferenceRoom room in lstRooms)
+        //The dates will have been validated in the client before being passed into this method
+        try
         {
-            if(room.RoomNumber == RoomNum && room.Status == BookingStatus.Available)
+            //checking to see if the conference room exists
+            ConferenceRoom conferenceRoom = lstRooms.First(s => s.RoomNumber == RoomNum);
+
+            if ( _History.Count() == 0 )
             {
-                targetRoom = room;
-                break;
+                Booking booking = new Booking(conferenceRoom, BookerName, BookingDate, StartTime, EndTime);
+                return true;
             }
-        }
-        
-        if(targetRoom == null) return false;
-        
-        // Check all bookings for overlaps
-        foreach(BookingRequest booking in _History)
+            else
+            {
+                //looking for a booking in the history that matches the one trying to be made
+                BookingRequest bookingRequest = _History.First(s => s.Booking.conferenceRoom == conferenceRoom
+                                                && s.Booking.BookerName == BookerName && s.Booking.BookingDate == BookingDate
+                                                && s.Booking.StartTime == StartTime && s.Booking.EndTime == EndTime );
+                if( bookingRequest == null )
+                {//if no request in the history matches, then booking is available and can be made without duplication
+                    Booking booking = new Booking(conferenceRoom, BookerName, BookingDate, StartTime, EndTime);
+                    return true;
+                }
+                else
+                {//duplicate was found and booking cannot be made
+                    throw new Exception ("Booking already exists.");
+                }
+            }//if/else end
+            
+        }//try
+        catch (Exception ex)
         {
-            if(booking.RoomNumber == RoomNum && 
-               booking.BookingDate.Date == BookingDate.Date &&
-               ((StartTime < booking.EndTime && StartTime >= booking.StartTime) ||
-                (EndTime > booking.StartTime && EndTime <= booking.EndTime) ||
-                (StartTime <= booking.StartTime && EndTime >= booking.EndTime)))
-            {
-                return false;
-            }
-        }
+             //if none of the rooms have the same number then no room was found so throw exception
+             throw new InvalidDataException ( ex + ": Invalid room number given. Please check it and try again." );
+             //return false;
+        }//catch
         
-        // No conflicts found - create booking
-        RoomType roomType = targetRoom.RoomType;
-        BookingRequest newBooking = new BookingRequest(RoomNum, roomType, BookerName, BookingDate, StartTime, EndTime);
-        _History.Add(newBooking);
-        targetRoom.Status = BookingStatus.Booked;
-        return true;
-    }
+    }//BookRoom
 
 /// Method to cancel a booking
 public bool CancelBooking(string RoomNum, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
 {
-    // Find and remove the matching booking from history
-    BookingRequest bookingToCancel = null;
-    foreach(BookingRequest booking in _History)
-    {
-        if(booking.RoomNumber == RoomNum && 
-           booking.BookerName == BookerName &&
-           booking.BookingDate.Date == BookingDate.Date &&
-           booking.StartTime == StartTime &&
-           booking.EndTime == EndTime)
+    //The dates will have been validated in the client before being passed into this method
+        try
         {
-            bookingToCancel = booking;
-            break;
-        }
-    }
-    
-    if(bookingToCancel == null) return false; // Booking not found
-    
-    _History.Remove(bookingToCancel);
-    
-    // Set room back to Available if no more bookings for this room
-    bool hasOtherBookings = false;
-    foreach(BookingRequest booking in _History)
-    {
-        if(booking.RoomNumber == RoomNum)
-        {
-            hasOtherBookings = true;
-            break;
-        }
-    }
-    
-    if(!hasOtherBookings)
-    {
-        foreach(ConferenceRoom room in lstRooms)
-        {
-            if(room.RoomNumber == RoomNum)
+            //checking to see if the conference room exists
+            ConferenceRoom conferenceRoom = lstRooms.First(s => s.RoomNumber == RoomNum);
+
+            if ( _History.Count() == 0 )
             {
-                room.Status = BookingStatus.Available;
-                break;
+                throw new Exception ("There are no bookings to cancel.");
             }
-        }
-    }
-    
-    return true;
+            else
+            {
+                //looking for a booking in the history that matches the one trying to be made
+                BookingRequest bookingRequest = _History.First(s => s.Booking.conferenceRoom == conferenceRoom
+                                                && s.Booking.BookerName == BookerName && s.Booking.BookingDate == BookingDate
+                                                && s.Booking.StartTime == StartTime && s.Booking.EndTime == EndTime );
+                if( bookingRequest == null )
+                {//if no request in the history matches, then the booking the user wants to cancel doesn't exist and cancellation fails
+                    throw new Exception ( "No booking matching the given data was found, please check the information and try again.");
+                }
+                else
+                {//The booking was found in the history and will be removed from the history
+                    
+                    _History.Remove(bookingRequest);
+                    return true;
+                }
+            }//if else
+            
+        }//try
+        catch (Exception ex)
+        {
+             //if none of the rooms have the same number then no room was found so throw exception
+             throw new InvalidDataException ( ex + ": Invalid room number given. Please check it and try again." );
+             //return false;
+        }//catch
 }
     
 }

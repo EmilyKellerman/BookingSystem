@@ -7,21 +7,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        //Hardcoded rooms for testing purposes
-        ConferenceRoom room1 = new ConferenceRoom("101", "Alpha", 10, RoomType.Small);
-        room1.Status = BookingStatus.Available;
-
-        ConferenceRoom room2 = new ConferenceRoom("102", "Beta", 20, RoomType.Medium);
-        room2.Status = BookingStatus.Available;
-
-        ConferenceRoom room3 = new ConferenceRoom("201", "Gamma", 15, RoomType.Small);
-        room3.Status = BookingStatus.Available;
-
-        ConferenceRoom room4 = new ConferenceRoom("202", "Delta", 25, RoomType.Large);
-        room4.Status = BookingStatus.Available;
-
-        ConferenceRoom room5 = new ConferenceRoom("301", "Epsilon", 50, RoomType.Auditorium);
-        room5.Status = BookingStatus.UnderMaintenance;
 
         ///introduction message and menu selection
         Console.WriteLine("===================================");
