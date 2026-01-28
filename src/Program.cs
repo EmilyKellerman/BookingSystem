@@ -2,10 +2,11 @@
 /// Client of Booking System
 
 using System;
+using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         #region welcoming and menu
         ///introduction message and menu selection
@@ -16,7 +17,8 @@ class Program
         /// Menu options
         Console.WriteLine("1: Book a Conference Room");
         Console.WriteLine("2: Cancel a Booking");
-        Console.WriteLine("3: View list of Rooms grouped by Room Type");
+        Console.WriteLine("3: Export Booking history as json file");
+        Console.WriteLine("4: Load history from file");
         Console.WriteLine("===================================");
         Console.WriteLine("Please enter the number of your selection:");
         #endregion
@@ -44,7 +46,7 @@ class Program
                 string? roomNum = Console.ReadLine();
                 if(string.IsNullOrWhiteSpace(roomNum))
                 {
-                    throw new Exception ("Room number cannot be null or empty. Please enter a valid room number.");
+                    throw new InvalidRoomNumberException();
                 }
 
                 Console.WriteLine("Please enter your name:");
@@ -122,8 +124,7 @@ class Program
                     throw new Exception ("Booking failed. Please check the room number and try again.");
                 }
                 
-                break;
-                ///Case 1
+                break;//Case 1
                 #endregion
 
             case 2:
@@ -134,7 +135,7 @@ class Program
                 roomNum = Console.ReadLine();
                 if(string.IsNullOrWhiteSpace(roomNum))
                 {
-                    throw new Exception ("Room number cannot be null or empty. Please enter a valid room number.");
+                    throw new InvalidRoomNumberException();
                 }
 
                 Console.WriteLine("Please enter your name:");
@@ -191,13 +192,28 @@ class Program
                 {
                     Console.WriteLine("Cancellation failed. Please check the room number and try again.");
                 }
-                break;
-                ///case 3
+                break;//case 2
                 #endregion
+
+            case 3:
+            #region Exporting to file
+                ////Export BookingRequest list as json
+                Booking bking = new Booking();
+                await bking.SaveHistoryAsync();
+                break;//Case 3
+            #endregion
+
+            case 4:
+            #region Load from file
+                ///Reading history from file
+                Booking bkingRead = new Booking();
+                await bkingRead.LoadHistoryAsync();
+                break;//Case 4
+            #endregion
 
             default:
                 Console.WriteLine("Invalid selection. Please try again.");
                 break;
-        }        
+        }//Switch      
     }
 }

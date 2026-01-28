@@ -1,7 +1,8 @@
 //Booking class to handle bookings
 ///Last updates 27/01/2026
 using System;
-
+using System.Text.Json;
+using System.IO;
 
 public class Booking
 {
@@ -65,6 +66,7 @@ public class Booking
             return grouped;
         }
 
+    #region Book room method
     //Method to book a room
     public bool BookRoom(string RoomNum, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
     {
@@ -105,11 +107,13 @@ public class Booking
         }//catch
         
     }//BookRoom
+    #endregion
 
-/// Method to cancel a booking
-public bool CancelBooking(string RoomNum, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
-{
-    //The dates will have been validated in the client before being passed into this method
+    #region Cancel booking method
+    /// Method to cancel a booking
+    public bool CancelBooking(string RoomNum, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
+    {
+        //The dates will have been validated in the client before being passed into this method
         try
         {
             //checking to see if the conference room exists
@@ -140,10 +144,39 @@ public bool CancelBooking(string RoomNum, string BookerName, DateTime BookingDat
         }//try
         catch (Exception ex)
         {
-             //if none of the rooms have the same number then no room was found so throw exception
-             throw new InvalidDataException ( ex + ": Invalid room number given. Please check it and try again." );
-             //return false;
+            //if none of the rooms have the same number then no room was found so throw exception
+            throw new InvalidDataException ( ex + ": Invalid room number given. Please check it and try again." );
+            //return false;
         }//catch
-}
-    
+    }//Cancel booking
+    #endregion
+
+    #region Send Booking requests to json file
+    //Writing history to files
+    public async Task SaveHistoryAsync()
+    {
+        List<BookingRequest> snapshot = _History.ToList();
+        string json = JsonSerializer.Serialize(snapshot);
+        await File.WriteAllTextAsync("History.json", json);
+    }//SaveHistoryAsync
+    #endregion
+
+    #region Load Booking requests from json file
+    //load history from file
+    public async Task<List<BookingRequest>> LoadHistoryAsync()
+    {
+        List<string> historySnap = new List<string>();
+        if (File.Exists("History.json"))
+        {
+            
+            string json = await File.ReadAllTextAsync("History.json");
+
+            return JsonSerializer.Deserialize<List<BookingRequest>>(json) ?? new List<BookingRequest>();
+        }
+        else
+        {
+            throw new FileNotFoundException ("History file not found.");
+        }
+    }//LoadHistoryAsync
+    #endregion
 }
