@@ -7,6 +7,11 @@ There will be an administrator login portal giving them access to the administra
 There will also be functionality for a receptionist to book on behalf of another person and for facility managers to book a room for maintenance.
 The code has been laid out with room for expansion for these features.
 
+The current features are:
+1) Listing of rooms
+2) Booking a room
+3) Canceling a booking
+
 This code will eventually be merged with existing API endpoints and documentation.
 
 ---
@@ -27,7 +32,6 @@ This code will eventually be merged with existing API endpoints and documentatio
 - Any changes will be made using the pull request template provided.
 - Make sure to clone the GitHub repository should you indeed intend on creating pull requests.
 
-
 ---
 
 ## 📌 Purpose of This Repository
@@ -36,6 +40,7 @@ This repository is used for:
 - Creating the code that will form the base of the Conference Room Booking System
 - Working to eventually merge this work with existing API documentation
 - Gradually improving project documentation over time
+- Gradually improving project code over time
 
 At this stage, the repository focuses on **Creating Basic Functionality Code**, not full system implementation.
 
@@ -61,13 +66,13 @@ At this stage, the system is documented through:
 ## 💪 Developer Onboarding Guide
 
  - This project is developed incrementally for a Software training program
- - The project will have additions made to it daily through assignents and will slowly build up to being a functional booking system for employees
+ - The project will have additions made to it daily through assignments and will slowly build up to being a functional booking system for employees
  - Documentation is organised with a pre-determined file structure, that will have files added and/or edited according to the work that is done
  - Project artefacts can be found in the project folders. So far the artefacts available are:
 
     1) Pull Request Template
 
- - Technologies used so far and are planned to be used:
+ - Technologies used so far:
 
     1) VS Code as a file editior
     2) VS Code as a git terminal
