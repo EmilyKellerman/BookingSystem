@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookingSystemCode")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbeedee1de6fbb76ed53b4910ffab3b6db856ce3")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15f37571d169af732aa66846f3d6da8bac16007f")]
->>>>>>> 285d793f2bf0eba2f2553f88301ed61c572b9410
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c33d6f9559e0df9f41dcc95941a8d2638b42ed89")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookingSystemCode")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookingSystemCode")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
