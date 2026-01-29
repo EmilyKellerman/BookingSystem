@@ -1,4 +1,4 @@
-namespace ConferenceBookingDomain
+namespace BookingSystem
 {
     public class SeedData()
     {

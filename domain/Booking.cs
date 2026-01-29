@@ -1,6 +1,7 @@
-using ConferenceBookingDomain;
+using BookingSystem;
 
-namespace ConferenceBookingDomain{
+namespace BookingSystem
+{
 public class Booking
 {
     public ConferenceRoom Room { get; }

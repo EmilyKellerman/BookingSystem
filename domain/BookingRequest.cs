@@ -1,6 +1,7 @@
 
 
-namespace ConferenceBookingDomain{
+namespace BookingSystem
+{
  
  public record BookingRequest
     {

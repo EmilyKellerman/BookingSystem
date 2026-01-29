@@ -2,7 +2,8 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
 
-namespace ConferenceBookingDomain{
+namespace BookingSystem
+{
 public class BookingFileStore
 {
     private readonly string _filepath;
