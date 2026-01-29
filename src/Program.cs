@@ -27,6 +27,11 @@ class Program
         /// Get user input
         int input = int.Parse(Console.ReadLine());
         ConferenceRoom conferenceRoom = new ConferenceRoom();
+
+        // Getting new rooms for booking
+        conferenceRoom.CreateRooms();
+
+
         switch (input)
         {
             case 1:
@@ -36,8 +41,8 @@ class Program
                 Console.WriteLine("List of available rooms:");
                 
                 // Display available rooms
-                List<ConferenceRoom> rooms = new ConferenceRoom().GetAllRooms();
-                foreach( ConferenceRoom room in rooms )
+                ConferenceRoom.lstRooms[1].GetAvailableRooms();
+                foreach( ConferenceRoom room in ConferenceRoom.lstRooms )
                 {
                     Console.WriteLine($"Room Number: {room.RoomNumber}, Room Type: {room.RoomType} Room Name: {room.RoomName}, Capacity: {room.Capacity}, Status: {room.Status}");
                 }
@@ -200,6 +205,8 @@ class Program
                 ////Export BookingRequest list as json
                 Booking bking = new Booking();
                 await bking.SaveHistoryAsync();
+
+                Console.WriteLine("Exporting successful");
                 break;//Case 3
             #endregion
 
@@ -208,6 +215,7 @@ class Program
                 ///Reading history from file
                 Booking bkingRead = new Booking();
                 await bkingRead.LoadHistoryAsync();
+                Console.WriteLine("Load complete");
                 break;//Case 4
             #endregion
 

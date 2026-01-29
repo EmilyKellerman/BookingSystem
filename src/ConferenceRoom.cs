@@ -4,6 +4,11 @@
 
 public class ConferenceRoom
 {
+    /// List of existing rooms - Private and Static so all instances share the same list
+    
+    public static List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
+
+
     /// Properties -> All of them are readonly outside of the class
     /// A separate class can be made available to manage room creation and updates by the admin staff type in the future
     public string RoomNumber { get; }
@@ -42,9 +47,6 @@ public class ConferenceRoom
             lstRooms.Add(this);
         }
     }
-
-    /// List of existing rooms - Private and Static so all instances share the same list
-    private static List<ConferenceRoom> lstRooms = new List<ConferenceRoom>();
     
 
     public ConferenceRoom()
@@ -52,17 +54,29 @@ public class ConferenceRoom
         ///Default Constructor
     }
 
+
     //Method to get rooms if their status is available -> not necessary because it doesn't make logical sense (leaving here for in case it's useful later)
-    // public List<ConferenceRoom> GetAvailableRooms()
-    // {
-    //     /// Method to get a list of available rooms using LINQ
-    //     List<ConferenceRoom> availableRooms = lstRooms.Where(room => room.Status == BookingStatus.Available).ToList();
-    //     return availableRooms;
-    // }
+    public List<ConferenceRoom> GetAvailableRooms()
+    {
+        /// Method to get a list of available rooms using LINQ
+        List<ConferenceRoom> availableRooms = lstRooms.Where(room => room.Status == BookingStatus.Available).ToList();
+        return availableRooms;
+    }
 
     public List<ConferenceRoom> GetAllRooms()
     {
         /// Method to get all rooms regardless of status
         return new List<ConferenceRoom>(lstRooms);
     }
+
+    public void CreateRooms()
+    {
+        // Hardcoded rooms for testing purposes
+        ConferenceRoom room1 = new ConferenceRoom ("1", "room1", 10, RoomType.Small);
+        ConferenceRoom room2 = new ConferenceRoom ("2", "room2", 20, RoomType.Small);
+        ConferenceRoom room3 = new ConferenceRoom ("3", "room3", 30, RoomType.Medium);
+        ConferenceRoom room4 = new ConferenceRoom ("4", "room4", 40, RoomType.Large);
+        ConferenceRoom room5 = new ConferenceRoom ("5", "room5", 50, RoomType.Auditorium);
+    }//CreateRooms
+
 }

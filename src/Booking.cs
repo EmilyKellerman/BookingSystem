@@ -6,6 +6,7 @@ using System.IO;
 
 public class Booking
 {
+    
     //auto-implemented properties
     private ConferenceRoom conferenceRoom { get; set; }
     public DateTime BookingDate { get; }
@@ -16,7 +17,7 @@ public class Booking
 
     //List to hold booking requests - Static so all Booking instances share the same history
     private static readonly List<BookingRequest> _History = new List<BookingRequest>();
-
+    
     //constructor
     public Booking ( ConferenceRoom conferenceRoom, string BookerName, DateTime BookingDate, DateTime StartTime, DateTime EndTime)
     {
