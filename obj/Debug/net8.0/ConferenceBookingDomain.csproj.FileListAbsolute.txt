@@ -1,0 +1,45 @@
+C:\Users\zanke\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.exe
+C:\Users\zanke\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.deps.json
+C:\Users\zanke\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.runtimeconfig.json
+C:\Users\zanke\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.dll
+C:\Users\zanke\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.pdb
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.AssemblyInfoInputs.cache
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.AssemblyInfo.cs
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.csproj.CoreCompileInputs.cache
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.sourcelink.json
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.dll
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\refint\ConferenceBookingDomain.dll
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.pdb
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.genruntimeconfig.cache
+C:\Users\zanke\ConferenceBookingDomain\obj\Debug\net8.0\ref\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.exe
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.deps.json
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.runtimeconfig.json
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\bin\Debug\net8.0\ConferenceBookingDomain.pdb
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.AssemblyInfoInputs.cache
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.AssemblyInfo.cs
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.csproj.CoreCompileInputs.cache
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.sourcelink.json
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\refint\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.pdb
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ConferenceBookingDomain.genruntimeconfig.cache
+C:\Users\Training Center 1\Repos\ConferenceBookingDomain\obj\Debug\net8.0\ref\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\bin\Debug\net8.0\ConferenceBookingDomain.exe
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\bin\Debug\net8.0\ConferenceBookingDomain.deps.json
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\bin\Debug\net8.0\ConferenceBookingDomain.runtimeconfig.json
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\bin\Debug\net8.0\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\bin\Debug\net8.0\ConferenceBookingDomain.pdb
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.AssemblyInfoInputs.cache
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.AssemblyInfo.cs
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.csproj.CoreCompileInputs.cache
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.sourcelink.json
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\refint\ConferenceBookingDomain.dll
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.pdb
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ConferenceBookingDomain.genruntimeconfig.cache
+C:\Users\Training Center 1\Emily\BookingSystemCode\BookingSystem\obj\Debug\net8.0\ref\ConferenceBookingDomain.dll
