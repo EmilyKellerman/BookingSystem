@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using BookingSystem;
+using System.Collections.Generic;
 
 namespace API.controllers
 {
@@ -15,18 +16,18 @@ namespace API.controllers
         }
 
         [HttpGet] //GET /api/bookings
-        public async Task<ActionResult> GetAll()
+        public ActionResult<IEnumerable<Booking>> GetAll()
         {
-            var bookings = await _manager.GetBookings();
-            return Ok(calculations);
+            var bookings = _manager.GetBookings();
+            return Ok(bookings);
         }
         
-        [HttpPost]
-        public async Task<IActionResult> Book(BookingManager request)
+        [HttpPost] //POST /api/bookings
+        public ActionResult<Booking> Book([FromBody] BookingRequest request)
         {
-            var result = await _manager.CreateBooking(request);
-            return Ok(request);
+            var result = _manager.CreateBooking(request);
+            return Ok(result);
         }
 
     }
-}
+} 
