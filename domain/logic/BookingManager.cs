@@ -2,8 +2,6 @@ using System;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BookingSystem
 {
@@ -11,11 +9,6 @@ public class BookingManager     //All business rules
 {
     //Properties
     private readonly List<Booking> _bookings;
-
-    public BookingManager()
-    {
-        _bookings = new List<Booking>();
-    }
     //Methods
     public IReadOnlyList<Booking> GetBookings()
     {
