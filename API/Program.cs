@@ -2,12 +2,23 @@ using BookingSystem;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen();
+
+var dataDirectory = Path.Combine(builder.Environment.ContentRootPath,"Data");
+
+builder.Services.AddSingleton<BookingFileStore>(
+new BookingFileStore(dataDirectory)
+);
+
 // Add services to the container.
 builder.Services.AddControllers(); //tells ASP.NET that this application will use controllers as entry points
 builder.Services.AddSwaggerGen();
 
 // Register domain services
 builder.Services.AddSingleton<BookingManager>();
+builder.Services.AddScoped<RoomManager>();
+
 
 var app = builder.Build();
 

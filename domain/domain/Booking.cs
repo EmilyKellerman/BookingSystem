@@ -9,33 +9,22 @@ public class Booking
     public DateTime EndTime { get; }
     public BookingStatus Status { get; set; }
 
-
-
     public Booking (ConferenceRoom room, DateTime start, DateTime end){
         Room = room;    //Validation in conference room
         StartTime = start;
         EndTime = end;
     }
     
-    
-
-
     public void Confirm()
-        {
-            Status = BookingStatus.Confirmed;
-        }
-
-
+    {
+        Status = BookingStatus.Confirmed;
+    }
 
     public Booking Cancel()
     {
-        
-
         Status = BookingStatus.Cancelled;
         return this;
     }
-
-
 
 }
 }

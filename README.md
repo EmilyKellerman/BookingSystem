@@ -1,6 +1,6 @@
 # 🏢 Conference Room Booking System
 
-This repository contains a project with the base code for a Conference Room Booking System.
+This repository contains a web API project for a Conference Room Booking System.
 
 This system will allow employees to search a list of available rooms and book a room for use.
 There will be an administrator login portal giving them access to the administrator dashboard in the future.
@@ -13,7 +13,7 @@ The current features are:
 3) Exporting booking history as a json file
 4) Loading history from a json file
 
-This code will eventually be merged with existing API endpoints and documentation.
+This code is in the process of being merged with existing API endpoints and documentation.
 
 ---
 
@@ -37,8 +37,8 @@ This code will eventually be merged with existing API endpoints and documentatio
 
 ## How Failures are Handled
 
-- In the client code, all data that is taken from user input is validated before being passed into methods of other classes
-- In methods, all data is validated before furhtering steps can be taken
+- All business logic is kept separate from the API endpoints and Http methods
+- In Http methods, all data is validated in a separate class before returning Http responses
 - All validation follows a fail-fast approach to avoid invalid object states
 
 ---
@@ -47,6 +47,7 @@ This code will eventually be merged with existing API endpoints and documentatio
 
 - This project makes use of async in creating a json file with booking history
 - This project makes use of async in loading a json file with booking history
+- Http methods are async for efficient use of resources
 
 ---
 

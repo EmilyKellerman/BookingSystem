@@ -4,18 +4,23 @@ using System.IO;
 
 namespace BookingSystem
 {
-public class BookingFileStore
+public class BookingFileStore : IBookingStore
 {
     private readonly string _filepath;
+    private readonly string _directoryPath;
 
-    public BookingFileStore(string filepath)
+    public BookingFileStore(string _directoryPath)
     {
-        _filepath = filepath;
+        this._directoryPath = _directoryPath;
+        _filepath = Path.Combine(_directoryPath, "history.json");
     }
 
     public async Task SaveAsync(IEnumerable<Booking> bookings)
     {
-
+        if (!Directory.Exists(_directoryPath))
+        {
+            Directory.CreateDirectory(_directoryPath);
+        }
         string json = JsonSerializer.Serialize(bookings);
         await File.WriteAllTextAsync(_filepath, json);
     }
