@@ -16,16 +16,26 @@ namespace API.controllers
         }
 
         [HttpGet] //GET /api/bookings
-        public ActionResult<IEnumerable<Booking>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var bookings = _manager.GetBookings();
+            if (!bookings.Any())//if there aren't any bookings then return an error message
+            {
+                return NotFound("There are no bookings in the history");
+            }
             return Ok(bookings);
         }
         
         [HttpPost] //POST /api/bookings
-        public ActionResult<Booking> Book([FromBody] BookingRequest request)
+        public async Task<IActionResult> Book([FromBody] BookingRequest request)
         {
-            var result = _manager.CreateBooking(request);
+            var result = await _manager.CreateBooking(request);
+
+            if (result == null)
+            {
+                return BadRequest("Invalid input");
+            }
+
             return Ok(result);
         }
 

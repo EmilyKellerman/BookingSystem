@@ -7,10 +7,15 @@ namespace BookingSystem
 public class BookingFileStore
 {
     private readonly string _filepath;
+    private readonly string _directoryPath;
 
-    public BookingFileStore(string filepath)
+    public BookingFileStore(string _directoryPath)
     {
-        _filepath = filepath;
+        if (!Directory.Exists(_directoryPath))
+        {
+            Directory.CreateDirectory(_directoryPath);
+        }
+        _filepath = Path.Combine(_directoryPath, "history.json");
     }
 
     public async Task SaveAsync(IEnumerable<Booking> bookings)
