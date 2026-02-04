@@ -32,7 +32,7 @@ namespace API.controllers
                 }
 
                 return Ok("Successfully cancelled the booking");
-            }
+            }//already have explicit failure responses
         }
 
     }
