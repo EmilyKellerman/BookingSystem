@@ -48,5 +48,25 @@ namespace API.controllers
             
         }
 
+        [HttpDelete] //DELETE /api/rooms
+        public async Task<IActionResult> DeleteRoom([FromBody] DeleteBookingDto dto)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                var result = new RoomRequest(dto.room);
+
+                if (!await _manager.DeleteRoom(result))
+                {
+                    return BadRequest("Invalid input");
+                }
+
+                return Ok("Successfully deleted room");
+            }
+        }
+
     }
 } 
