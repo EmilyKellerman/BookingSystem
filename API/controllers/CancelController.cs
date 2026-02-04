@@ -28,7 +28,7 @@ namespace API.controllers
 
                 if (!_manager.CancelBooking(result))
                 {
-                    return BadRequest("Invalid input");
+                    return BadRequest("Invalid input. Cancellation failed.");
                 }
 
                 return Ok("Successfully cancelled the booking");

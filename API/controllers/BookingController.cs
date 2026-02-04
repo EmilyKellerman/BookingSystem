@@ -40,10 +40,10 @@ namespace API.controllers
                 var booking = _manager.CreateBooking(result);
                 if (booking == null)
                 {
-                    return BadRequest("Invalid input");
+                    return BadRequest("Invalid input. Booking was not created.");
                 }
 
-                return Ok(result);
+                return Ok(result + "\nBooking created successfully");
             }
             
         }

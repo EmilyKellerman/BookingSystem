@@ -40,7 +40,7 @@ namespace API.controllers
                 var room = _manager.CreateRoom(result);
                 if (room == null)
                 {
-                    return BadRequest("Invalid input");
+                    return BadRequest("Invalid input. Room Could Not Be Created");
                 }
 
                 return Ok(result);
@@ -61,10 +61,10 @@ namespace API.controllers
 
                 if (!_manager.DeleteRoom(result))
                 {
-                    return BadRequest("Invalid input");
+                    return BadRequest("Invalid input. Failed to Delete Room");
                 }
 
-                return Ok("Successfully deleted room");
+                return Ok("Successfully Deleted Room");
             }
         }
 
