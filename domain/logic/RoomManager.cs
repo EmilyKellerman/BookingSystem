@@ -25,7 +25,7 @@ public class RoomManager     //All business rules
 
     public ConferenceRoom CreateRoom(RoomRequest request)
     {
-        if(request.Room == null)
+        if(request.Room.RoomNumber == null)
         {
             throw new ArgumentException("Room must exist");
         }
@@ -47,7 +47,7 @@ public class RoomManager     //All business rules
     //DeleteRoom
     public bool DeleteRoom(RoomRequest request)
     {
-        if(request.Room == null)
+        if(request.Room.RoomNumber == null)
         {
             throw new ArgumentException("Room must exist");
         }

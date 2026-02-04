@@ -17,6 +17,8 @@ builder.Services.AddSwaggerGen();
 
 // Register domain services
 builder.Services.AddSingleton<BookingManager>();
+builder.Services.AddScoped<RoomManager>();
+
 
 var app = builder.Build();
 

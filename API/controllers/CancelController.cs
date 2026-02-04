@@ -26,7 +26,7 @@ namespace API.controllers
             {
                 var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
 
-                if (!await _manager.CancelBooking(result))
+                if (!_manager.CancelBooking(result))
                 {
                     return BadRequest("Invalid input");
                 }

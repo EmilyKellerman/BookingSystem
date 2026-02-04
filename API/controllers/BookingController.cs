@@ -37,7 +37,7 @@ namespace API.controllers
             {
                 var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
 
-                var booking = await _manager.CreateBooking(result);
+                var booking = _manager.CreateBooking(result);
                 if (booking == null)
                 {
                     return BadRequest("Invalid input");

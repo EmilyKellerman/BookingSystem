@@ -37,7 +37,7 @@ namespace API.controllers
             {
                 var result = new RoomRequest(dto.room);
 
-                var room = await _manager.CreateRoom(result);
+                var room = _manager.CreateRoom(result);
                 if (room == null)
                 {
                     return BadRequest("Invalid input");
@@ -49,7 +49,7 @@ namespace API.controllers
         }
 
         [HttpDelete] //DELETE /api/rooms
-        public async Task<IActionResult> DeleteRoom([FromBody] DeleteBookingDto dto)
+        public async Task<IActionResult> DeleteRoom([FromBody] DeleteRoomDto dto)
         {
             if(!ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace API.controllers
             {
                 var result = new RoomRequest(dto.room);
 
-                if (!await _manager.DeleteRoom(result))
+                if (!_manager.DeleteRoom(result))
                 {
                     return BadRequest("Invalid input");
                 }
