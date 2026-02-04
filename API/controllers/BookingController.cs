@@ -27,16 +27,45 @@ namespace API.controllers
         }
         
         [HttpPost] //POST /api/bookings
-        public async Task<IActionResult> Book([FromBody] BookingRequest request)
+        public async Task<IActionResult> Book([FromBody] CreateBookingDto dto)
         {
-            var result = await _manager.CreateBooking(request);
-
-            if (result == null)
+            if(!ModelState.IsValid)
             {
-                return BadRequest("Invalid input");
+                return BadRequest(ModelState);
             }
+            else
+            {
+                var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
 
-            return Ok(result);
+                var booking = await _manager.CreateBooking(result);
+                if (booking == null)
+                {
+                    return BadRequest("Invalid input");
+                }
+
+                return Ok(result);
+            }
+            
+        }
+
+        [HttpDelete] //DELETE /api/bookings
+        public async Task<IActionResult> CancelBooking([FromBody] CancelBookingDto dto)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
+
+                if (!await _manager.CancelBooking(result))
+                {
+                    return BadRequest("Invalid input");
+                }
+
+                return Ok("Successfully cancelled the booking");
+            }
         }
 
     }

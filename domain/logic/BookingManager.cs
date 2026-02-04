@@ -48,6 +48,33 @@ public class BookingManager     //All business rules
 
     }
 
+    //CancelBooking
+    public bool CancelBooking(BookingRequest request)
+    {
+        if(request.Room == null)
+        {
+            throw new ArgumentException("Room must exist");
+        }
+        if(request.StartTime >= request.EndTime)
+        {
+            throw new ArgumentException("Invalid time range");
+        }
+
+        bool overlaps = _bookings.Any(b => b.Room == request.Room && b.Status == BookingStatus.Confirmed && request.StartTime < b.EndTime && request.EndTime > b.StartTime);
+        //if there are any overlaps, thats the booking we want to cancel, so we cancel it by removing it from _bookings
+        if (overlaps)
+        {
+            _bookings.Remove(_bookings.First(b => b.Room == request.Room && b.Status == BookingStatus.Confirmed 
+                                && request.StartTime < b.EndTime && request.EndTime > b.StartTime));
+            return true;
+        }
+            else
+            {
+                return false;
+            }
+
+    }
+
 }
 }
 
