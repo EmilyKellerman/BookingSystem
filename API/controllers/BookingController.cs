@@ -30,6 +30,5 @@ namespace API.controllers
             var booking = _manager.CreateBooking(result);
             return Ok(result + "\nBooking created successfully");
         }
-
     }
 } 
