@@ -19,34 +19,16 @@ namespace API.controllers
         public async Task<IActionResult> GetAll()
         {
             var bookings = _manager.GetBookings();
-            if (!bookings.Any())//if there aren't any bookings then return an error message
-            {
-                return NotFound("There are no bookings in the history");
-            }
             return Ok(bookings);
         }
         
         [HttpPost] //POST /api/bookings
         public async Task<IActionResult> Book([FromBody] CreateBookingDto dto)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
+            var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
 
-                var booking = _manager.CreateBooking(result);
-                if (booking == null)
-                {
-                    return BadRequest("Invalid input. Booking was not created.");
-                }
-
-                return Ok(result + "\nBooking created successfully");
-            }
-            
+            var booking = _manager.CreateBooking(result);
+            return Ok(result + "\nBooking created successfully");
         }
-
     }
 } 
