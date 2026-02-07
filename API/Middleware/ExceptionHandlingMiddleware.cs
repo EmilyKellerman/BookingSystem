@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
-using System.Net.Http.Json;
+using Microsoft.AspNetCore.Http;
+using System;
 
 public class ExceptionHandlingMiddleware
 {
@@ -13,8 +14,8 @@ public class ExceptionHandlingMiddleware
         response.StatusCode = exception switch
         {
             BookingConflictException => StatusCodes.Status422UnprocessableEntity,
-            NoBookingException => StatusCodes.Status422UnprocessableEntity,
-            NoConferenceRoomException => StatusCodes.Status422UnprocessableEntity,
+            NoBookingsException => StatusCodes.Status422UnprocessableEntity,
+            NoConferenceRoomsException => StatusCodes.Status422UnprocessableEntity,
             _ => StatusCodes.Status500InternalServerError
         };
 
