@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using BookingSystem;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ namespace API.controllers
         }
 
         [HttpGet] //GET /api/rooms
+        [Authorize]
         public async Task<IActionResult> GetRooms()
         {
             var rooms = _manager.GetRooms();
@@ -23,6 +25,7 @@ namespace API.controllers
         }
         
         [HttpPost] //POST /api/rooms
+        [Authorize(Roles = "Facilities Manager")]
         public async Task<IActionResult> CreateRoom([FromBody] CreateRoomDto dto)
         {
                 var result = new RoomRequest(dto.room);
@@ -33,6 +36,7 @@ namespace API.controllers
         }
 
         [HttpDelete] //DELETE /api/rooms
+        [Authorize(Roles = "Facilities Manager")]
         public async Task<IActionResult> DeleteRoom([FromBody] DeleteRoomDto dto)
         {
                 var result = new RoomRequest(dto.room);

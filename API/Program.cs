@@ -1,30 +1,84 @@
+
+using System.Reflection;
 using BookingSystem;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
-
-var dataDirectory = Path.Combine(builder.Environment.ContentRootPath,"Data");
-
-builder.Services.AddSingleton<BookingFileStore>(
-new BookingFileStore(dataDirectory)
+var dataDirectory = Path.Combine(
+    builder.Environment.ContentRootPath,
+    "Data"
 );
 
-// Add services to the container.
+builder.Services.AddSingleton<IBookingStore>(
+    new BookingFileStore(dataDirectory)
+);
+
+// Add services to the container
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlite("Data source=Bookings.db"));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddControllers(); //tells ASP.NET that this application will use controllers as entry points
 builder.Services.AddSwaggerGen();
 
-// Register domain services
+builder.Services.AddSingleton<IBookingStore>(new BookingFileStore(dataDirectory));
+
 builder.Services.AddSingleton<BookingManager>();
-builder.Services.AddScoped<RoomManager>();
+builder.Services.AddSingleton<RoomManager>();
+builder.Services.AddScoped<TokenService>();
 
+// Configure authentication with JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}
+).AddJwtBearer(options =>
+{
+    var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-that-is-at-least-32-characters-long-for-hs256";
+    var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "BookingSystemAPI";
+    var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "BookingSystemClient";
 
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true, 
+
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+    };
+});
+
+// Build the application and configure the HTTP request pipeline.
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await IdentitySeeder.SeedAsync(userManager,roleManager);
+}
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-app.MapControllers();//calling the controllers that will be used eventually
+app.MapControllers(); 
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,8 +87,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 
 
-app.Run();//will always be the last line of the program.cs class
+
+app.Run();

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using BookingSystem;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ namespace API.controllers
         }
 
         [HttpGet] //GET /api/bookings
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var bookings = _manager.GetBookings();
@@ -23,6 +25,7 @@ namespace API.controllers
         }
         
         [HttpPost] //POST /api/bookings
+        [Authorize(Roles = "Employee,Receptionist")]
         public async Task<IActionResult> Book([FromBody] CreateBookingDto dto)
         {
             var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
