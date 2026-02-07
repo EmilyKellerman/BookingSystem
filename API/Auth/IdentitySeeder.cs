@@ -5,10 +5,17 @@ public static class IdentitySeeder
     public static async Task SeedAsync(UserManager<ApplicationUser> userManager,
     RoleManager<IdentityRole> roleManager)
     {
-        if (!await roleManager.RoleExistsAsync("Admin"))
+        // Seed roles
+        string[] roles = { "Admin", "Employee", "Receptionist", "Facilities Manager" };
+        
+        foreach (var role in roles)
         {
-            await roleManager.CreateAsync(new IdentityRole("Admin"));
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
         }
+
         var admin = await userManager.FindByNameAsync("Skye");
 
         if (admin == null)

@@ -11,6 +11,7 @@ public class TokenService
     {
         _config = config;
     }
+    
     public string GenerateToken(ApplicationUser user, IList<string> roles)
     {
         var claims = new List<Claim>
