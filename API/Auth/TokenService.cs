@@ -27,13 +27,17 @@ public class TokenService
             claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
         }
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"] ?? string.Empty));
+        var jwtKey = _config["Jwt:Key"] ?? "your-super-secret-key-that-is-at-least-32-characters-long-for-hs256";
+        var jwtIssuer = _config["Jwt:Issuer"] ?? "BookingSystemAPI";
+        var jwtAudience = _config["Jwt:Audience"] ?? "BookingSystemClient";
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
-            issuer: _config["Jwt:Issuer"] ?? _config["Jwt:issuer"],
-            audience: _config["Jwt:Audience"] ?? _config["Jwt:audience"],
+            issuer: jwtIssuer,
+            audience: jwtAudience,
             claims: claims,
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: creds

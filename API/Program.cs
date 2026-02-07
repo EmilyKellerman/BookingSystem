@@ -43,7 +43,9 @@ builder.Services.AddAuthentication(options =>
 }
 ).AddJwtBearer(options =>
 {
-    var jwt = builder.Configuration.GetSection("Jwt");
+    var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-that-is-at-least-32-characters-long-for-hs256";
+    var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "BookingSystemAPI";
+    var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "BookingSystemClient";
 
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -52,11 +54,9 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true, 
 
-        ValidIssuer = jwt["Issuer"],
-        ValidAudience = jwt["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"])
-        )
-    
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
     };
 });
 

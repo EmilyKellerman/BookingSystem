@@ -9,13 +9,11 @@ namespace API.controllers
     [Route("api/auth/login")]
     public class LoginController : ControllerBase
     {
-        private readonly BookingManager _manager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly TokenService _tokenService;
 
-        public LoginController(BookingManager manager, UserManager<ApplicationUser> userManager, TokenService tokenService)
+        public LoginController(UserManager<ApplicationUser> userManager, TokenService tokenService)
         {
-            _manager = manager;
             _userManager = userManager;
             _tokenService = tokenService;
         }

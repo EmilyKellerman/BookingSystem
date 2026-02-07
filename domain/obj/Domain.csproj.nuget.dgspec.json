@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj": {}
+    "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj": {}
   },
   "projects": {
-    "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj": {
+    "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\emily\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\obj\\",
+        "outputPath": "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
