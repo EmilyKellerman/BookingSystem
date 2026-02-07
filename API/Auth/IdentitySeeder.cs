@@ -44,16 +44,16 @@ public static class IdentitySeeder
         }
 
         // Create one user for each non-admin role
-        var employee = await userManager.FindByNameAsync("employee2");
-        if (employee == null)
+        var employee2 = await userManager.FindByNameAsync("employee2");
+        if (employee2 == null)
         {
-            employee = new ApplicationUser
+            employee2 = new ApplicationUser
             {
                 UserName = "employee2",
                 Email = "employee2@booking.com"
             };
-            await userManager.CreateAsync(employee, "Employee123!");
-            await userManager.AddToRoleAsync(employee, "Employee");
+            await userManager.CreateAsync(employee2, "Employee123!");
+            await userManager.AddToRoleAsync(employee2, "Employee");
         }
 
         var receptionist = await userManager.FindByNameAsync("reception1");

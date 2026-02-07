@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using BookingSystem;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ namespace API.controllers
         }
 
         [HttpDelete] //DELETE /api/bookings
+        [Authorize(Roles = "Employee,Receptionist")]
         public async Task<IActionResult> CancelBooking([FromBody] CancelBookingDto dto)
         {
                 var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
