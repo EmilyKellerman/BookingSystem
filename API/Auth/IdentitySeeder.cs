@@ -26,8 +26,8 @@ public static class IdentitySeeder
                 Email = "Skye@booking.com"
             };
 
-            await userManager.CreateAsync(admin, "Skye123!");
-            await userManager.AddToRoleAsync(admin, "Admin");
+            await userManager.CreateAsync(admin, "Skye123!");//creating the user with a password
+            await userManager.AddToRoleAsync(admin, "Admin");//assigning the user to the admin role
         }
 
         // Create one user for each non-admin role
@@ -37,7 +37,20 @@ public static class IdentitySeeder
             employee = new ApplicationUser
             {
                 UserName = "employee1",
-                Email = "employee@booking.com"
+                Email = "employee1@booking.com"
+            };
+            await userManager.CreateAsync(employee, "Employee123!");
+            await userManager.AddToRoleAsync(employee, "Employee");
+        }
+
+        // Create one user for each non-admin role
+        var employee = await userManager.FindByNameAsync("employee2");
+        if (employee == null)
+        {
+            employee = new ApplicationUser
+            {
+                UserName = "employee2",
+                Email = "employee2@booking.com"
             };
             await userManager.CreateAsync(employee, "Employee123!");
             await userManager.AddToRoleAsync(employee, "Employee");

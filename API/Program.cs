@@ -28,13 +28,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddControllers(); //tells ASP.NET that this application will use controllers as entry points
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IBookingStore>(
-    new BookingFileStore(dataDirectory)
-);
+
+builder.Services.AddSingleton<IBookingStore>(new BookingFileStore(dataDirectory));
+
 builder.Services.AddSingleton<BookingManager>();
 builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddScoped<TokenService>();
 
+// Configure authentication with JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,10 +58,9 @@ builder.Services.AddAuthentication(options =>
         )
     
     };
-})
-;
+});
 
-
+// Build the application and configure the HTTP request pipeline.
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
