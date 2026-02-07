@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YoBwUOkrqXw=",
+  "dgSpecHash": "QhEkFEEGCz8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\API\\API.csproj",
+  "projectFilePath": "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\emily\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\emily\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.0\\microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
@@ -76,9 +76,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'System.IdentityModel.Tokens.Jwt' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
-      "projectPath": "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\API\\API.csproj",
+      "projectPath": "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\API\\API.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\API\\API.csproj",
+      "filePath": "c:\\Users\\emily\\Documents\\Third Year\\Bitcube documents\\BookingSystemCode\\BookingSystem\\API\\API.csproj",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net8.0"
