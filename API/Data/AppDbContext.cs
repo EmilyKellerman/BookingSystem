@@ -15,9 +15,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole, str
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<bookings>().HasKey(c => c.Id);
-
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<conRooms>().HasKey(c => c.Id);
+        modelBuilder.Entity<Booking>().HasKey(c => c.Id);
+        modelBuilder.Entity<ConferenceRoom>().HasKey(c => c.ID);
     }
 }
