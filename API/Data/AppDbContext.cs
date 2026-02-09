@@ -1,11 +1,19 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-public class AppDbContext : IdentityDbContext<ApplicationUser>
+using BookingSystem.Persistence;
+public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
+    public DbSet<Booking> bookings { get; set; }
+
     public AppDbContext(DbContextOptions<AppDbContext> options)
-    :base(options)
+        : base(options)
+    {}
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-    
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<bookings>().HasKey(c => c.Id);
     }
     
 }
