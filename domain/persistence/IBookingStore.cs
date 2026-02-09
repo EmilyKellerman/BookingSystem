@@ -2,6 +2,6 @@ using BookingSystem;
 
 public interface IBookingStore
 {
-    Task SaveAsync(IEnumerable<Booking> bookings);
-    Task<List<Booking>> LoadAsync();
+    Task SaveAsync(Booking booking);
+    Task<IReadOnlyList<Booking>> LoadAllAsync();
 }

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using domain.Domain;
-using domain.Persistence;
+using BookingSystem;
 
 public class EFBookingStore : IBookingStore
 {

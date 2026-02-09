@@ -15,27 +15,28 @@ public class BookingFileStore : IBookingStore
         _filepath = Path.Combine(_directoryPath, "history.json");
     }
 
-    public async Task SaveAsync(IEnumerable<Booking> bookings)
+    public async Task SaveAsync(Booking booking)
     {
         if (!Directory.Exists(_directoryPath))
         {
             Directory.CreateDirectory(_directoryPath);
         }
-        string json = JsonSerializer.Serialize(bookings);
+        var bookings = await LoadAllAsync();
+        var bookingsList = bookings.ToList();
+        bookingsList.Add(booking);
+        string json = JsonSerializer.Serialize(bookingsList);
         await File.WriteAllTextAsync(_filepath, json);
     }
 
-    public async Task<List<Booking>> LoadAsync()
+    public async Task<IReadOnlyList<Booking>> LoadAllAsync()
     {
-            if (!File.Exists(_filepath))
-            {
-                return new List<Booking>();
-            }
+        if (!File.Exists(_filepath))
+        {
+            return new List<Booking>();
+        }
        
-            string json = await File.ReadAllTextAsync(_filepath);
-            return JsonSerializer.Deserialize<List<Booking>>(json) ?? new List<Booking>();
-       
-
+        string json = await File.ReadAllTextAsync(_filepath);
+        return JsonSerializer.Deserialize<List<Booking>>(json) ?? new List<Booking>();
     }
 
 }

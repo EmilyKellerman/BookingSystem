@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using BookingSystem.Persistence;
+using BookingSystem;
+
 public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
     public DbSet<Booking> bookings { get; set; }
