@@ -7,12 +7,12 @@ namespace API.controllers
 {
     [ApiController]
     [Route("api/auth/login")]
-    public class LoginController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly TokenService _tokenService;
 
-        public LoginController(UserManager<ApplicationUser> userManager, TokenService tokenService)
+        public AuthController(UserManager<ApplicationUser> userManager, TokenService tokenService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
