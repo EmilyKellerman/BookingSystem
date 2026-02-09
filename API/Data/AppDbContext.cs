@@ -5,6 +5,7 @@ using BookingSystem.Persistence;
 public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
     public DbSet<Booking> bookings { get; set; }
+    public DbSet<ConferenceRoom> conRooms { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
@@ -14,6 +15,8 @@ public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole, str
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<bookings>().HasKey(c => c.Id);
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<conRooms>().HasKey(c => c.Id);
     }
-    
 }

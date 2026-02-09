@@ -20,7 +20,7 @@ builder.Services.AddSingleton<IBookingStore>(
 
 // Add services to the container
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseSqlite("Data source=Bookings.db"));
+options.UseSqlite(builder.Configuration.GetConnectionString("BookingDb")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 .AddEntityFrameworkStores<AppDbContext>()
