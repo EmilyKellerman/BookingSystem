@@ -10,10 +10,14 @@ namespace API.controllers
     public class BookingController : ControllerBase
     {
         private readonly BookingManager _manager;
+        private readonly EFBookingStore _context;
+        private readonly AppDbContext _dbContext;
 
-        public BookingController(BookingManager manager)
+        public BookingController(BookingManager manager, EFBookingStore context, AppDbContext dbContext)
         {
             _manager = manager;
+            _context = context;
+            _dbContext = dbContext;
         }
 
         [HttpGet] //GET /api/bookings
