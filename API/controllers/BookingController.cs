@@ -30,18 +30,19 @@ namespace API.controllers
         [Authorize(Roles = "Admin,Employee,Receptionist")]
         public async Task<IActionResult> Book([FromBody] CreateBookingDto dto)
         {
-            var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
+            var booking = new Booking(dto.room, dto.startTime, dto.endTime);
 
-            var booking = await _context.SaveAsync(result);//implementing DB
-            return Ok(result + "\nBooking created successfully");
+            await _context.SaveAsync(booking);//implementing DB
+            return Ok("Booking created successfully");
         }
 
         [HttpDelete] //DELETE /api/bookings
         [Authorize(Roles = "Employee,Receptionist")]
         public async Task<IActionResult> CancelBooking([FromBody] CancelBookingDto dto)
         {
-                var result = new BookingRequest(dto.room, dto.startTime, dto.endTime);
-                return Ok("Successfully cancelled the booking");
+            var booking = new Booking(dto.room, dto.startTime, dto.endTime);
+            await _context.CancelBookingAsync(booking);
+            return Ok("Successfully cancelled the booking");
         }
     }
 } 
