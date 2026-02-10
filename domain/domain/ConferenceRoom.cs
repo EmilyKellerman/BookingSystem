@@ -10,12 +10,14 @@ namespace BookingSystem
 
         public int Capacity { get; set; }
 
-        public RoomStatus Status { get; set; }
+        public RoomType type { get; set; }
+        public string location { get; set; }
+        public bool IsActive { get; set; }
 
         // Parameterless constructor for EF Core
         public ConferenceRoom() { }
 
-        public ConferenceRoom(int id, string roomNumber, int capacity, RoomStatus status)
+        public ConferenceRoom(int id, string roomNumber, int capacity, RoomType type)
         {
             if (string.IsNullOrWhiteSpace(roomNumber))
             {
@@ -30,7 +32,9 @@ namespace BookingSystem
             ID = id;
             RoomNumber = roomNumber;
             Capacity = capacity;
-            Status = status;
+            this.type = type;
+            location = "Not found";
+            IsActive = true;
         }
 
         

@@ -10,4 +10,5 @@ public class CancelBookingDto
     public DateTime startTime { get; set; }
     [Required]
     public DateTime endTime { get; set; }
+    public DateTime CancelledAt { get; set; }//asssignment3.2
 }

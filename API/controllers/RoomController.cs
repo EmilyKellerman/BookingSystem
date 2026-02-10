@@ -9,18 +9,22 @@ namespace API.controllers
     [Route("api/rooms")]
     public class RoomController : ControllerBase
     {
-        private readonly RoomManager _manager;
+        private readonly EFBookingStore _context;
+        private readonly BookingDbContext _db;
+        private readonly RoomManager _manager;//refrain from using for security
 
-        public RoomController(RoomManager manager)
+        public RoomController(RoomManager manager, EFBookingStore context, BookingDbContext db)
         {
             _manager = manager;
+            _context = context;
+            _db = db;
         }
 
         [HttpGet] //GET /api/rooms
         [Authorize]
         public async Task<IActionResult> GetRooms()
         {
-            var rooms = _manager.GetRooms();
+            var rooms = _context.LoadRoomsAsync();
             return Ok(rooms);
         }
         
@@ -30,19 +34,19 @@ namespace API.controllers
         {
                 var result = new RoomRequest(dto.room);
 
-                var room = _manager.CreateRoom(result);
+                var room = _context.SaveRoomAsync(result);
 
                 return Ok(result);
         }
 
-        [HttpDelete] //DELETE /api/rooms
-        [Authorize(Roles = "Facilities Manager")]
+        [HttpPatch] //PATCH /api/rooms
+        [Authorize(Roles = "Facilities Manager, Admin")]
         public async Task<IActionResult> DeleteRoom([FromBody] DeleteRoomDto dto)
         {
                 var result = new RoomRequest(dto.room);
-
+                var deletedRoom = await _context.RemoveRoomAsync(result);
                 return Ok("Successfully Deleted Room");
-        }
+        }//changing delete to PATCH - merged
 
     }
 } 
