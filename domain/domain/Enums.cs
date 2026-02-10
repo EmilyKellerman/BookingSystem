@@ -2,11 +2,11 @@
 {
     Confirmed,
     Cancelled,
-    Moved               //If admin resolves a conflict
+    Pending               //If admin resolves a conflict
 
 }
 
-public enum RoomStatus          //Additional enum for the status of the rooms for bookings
+public enum RoomType          //Additional enum for the status of the rooms for bookings
 {
     Standard,
     Training,

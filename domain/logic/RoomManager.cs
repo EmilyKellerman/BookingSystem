@@ -36,7 +36,7 @@ public class RoomManager     //All business rules
                 throw new ArgumentException("Room Number already used");
             }
 
-            ConferenceRoom room = new ConferenceRoom(request.Room.ID, request.Room.RoomNumber, request.Room.Capacity, request.Room.Status);
+            ConferenceRoom room = new ConferenceRoom(request.Room.ID, request.Room.RoomNumber, request.Room.Capacity, request.Room.type);
 
             _rooms.Add(room);
 

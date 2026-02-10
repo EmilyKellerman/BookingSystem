@@ -10,4 +10,5 @@ public class CreateBookingDto
     public DateTime startTime { get; set; }
     [Required]
     public DateTime endTime { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
